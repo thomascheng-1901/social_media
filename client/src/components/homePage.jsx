@@ -7,8 +7,10 @@ import Avatar from "../assets/images/avatar1.jpg"
 import PostImage from "../assets/images/blog1.jpg"
 import CommentSection from "./commentSection.jsx"
 import {setProfileToFind} from "../state/index.jsx"
+import LikeSection from './likeSection.jsx';
 
 const HomePage = () => {
+
 
     const form = useRef();
 
@@ -54,15 +56,12 @@ const HomePage = () => {
         updatedAt: post.updatedAt,
         description: post.description
       }));
-      console.log(result.length);
       let new_obj= []
       let position = 0;
       for (var i = result.length-1; i >= 0; --i){
         new_obj[position] = result[i];
         position += 1;
       }
-      console.log(new_obj);
-      console.log(result);
       setPosts(new_obj);
     } catch (e) {
       console.log('Fetch posts error: ' + e);
@@ -72,7 +71,6 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   const searchProfile = (id) => {
-    console.log("Search profile: " + id);
     if (stop.current) return console.log("stop navigate");
     dispatch(
         setProfileToFind({
@@ -112,7 +110,10 @@ const HomePage = () => {
                     </div>
                     <p className=''>{post.description}</p>
                     <img className='rounded-lg' src={PostImage} alt="postImage" />
-                    <CommentSection comments ={post.comments} id={post.id}></CommentSection>
+                    <div className=''>
+                      <LikeSection likes = {post.likes} id={post.id}></LikeSection>
+                      <CommentSection comments ={post.comments} id={post.id}></CommentSection>
+                    </div>
                 </div>
             )
         }

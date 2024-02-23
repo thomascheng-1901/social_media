@@ -11,7 +11,8 @@ router.get("/", getFeedPosts);
 router.get("/:userId/posts", getUserPosts);
 
 // UPDATE
-router.patch("/:id/like", verifyToken, likePost);
+// router.patch("/:id/like", verifyToken, likePost);
+router.patch("/:id/like", likePost);
 router.patch("/:id/comment", commentPost);
 
 export default router

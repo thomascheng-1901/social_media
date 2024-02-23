@@ -13,6 +13,8 @@ export const SocketContextProvider = ({children}) => {
     const [onlineUsers, setOnlineUsers]  = useState([]);
     const [comments, setComments] = useState(null);
     const [postIdWithComment, setPostIdWithComment] = useState(null);
+    const [postLikes, setPostLikes] = useState(null);
+    const [postIdWithLike, setPostIdWithLike] = useState(null);
 
     let currentUser = null;
     try {
@@ -45,10 +47,15 @@ export const SocketContextProvider = ({children}) => {
             setComments(currentComments[1]);
         })
 
+        socket.on("leaveLike", (currentLikes) => {
+            setPostIdWithLike(currentLikes[0]);
+            setPostLikes(currentLikes[1]);
+        })
+
         // return () => socket.close();
     },[])
 
-    return (<SocketContext.Provider value={{socket, onlineUsers, comments, postIdWithComment}}>
+    return (<SocketContext.Provider value={{socket, onlineUsers, comments, postIdWithComment, postLikes, postIdWithLike}}>
         {children}
         </SocketContext.Provider>)
 }
