@@ -88,33 +88,34 @@ const SignUpPage = () => {
     const [file, setfile] = useState();
 
     return (
-        <div className='flex justify-center items-center'>
+        <div className='flex justify-center items-center mb-10'>
             <form ref={form} onSubmit={SignUp} action="" className='w-[80%]  mt-[5%]'>
                 <div className='space-y-5 text-center'>
                     <div className='space-y-2'>
-                        <h1>Name</h1>
+                        <h1 className='font-bold'>Name</h1>
                         <div className='space-x-2 flex '>
                             <input className='w-full placeholder:text-center' placeholder='Enter your first name' name='firstName' type="text" />
                             <input className='w-full placeholder:text-center' placeholder='Enter your last name' name='lastName' type="text" />
                         </div>
                     </div>
                     <div className='space-y-2'>
-                        <h1>Email</h1>
+                        <h1 className='font-bold'>Email</h1>
                         <input placeholder='Enter your email' className="w-full placeholder:text-center" name='email' />
                     </div>
                     <div className='space-y-2'>
-                        <h1>Password</h1>
+                        <h1 className='font-bold'>Password</h1>
                         <input placeholder="Enter your password" className="w-full placeholder:text-center" name='password' />
                     </div>
                     <div className='space-y-2'>
-                        <h1>Location</h1>
+                        <h1 className='font-bold'>Location</h1>
                         <input placeholder="Enter your password" className="w-full placeholder:text-center" name='location' />
                     </div>
                     <div className='space-y-2'>
-                        <h1>Occupation</h1>
+                        <h1 className='font-bold'>Occupation</h1>
                         <input placeholder="Enter your password" className="w-full placeholder:text-center" name='occupation' />
                     </div>
-                    <div>
+                    <div className='space-y-2'>
+                        <p className='font-bold'>Choose an image as your profile picture</p>
                         <input type = "file" name = "file" onChange = {e => {setfile(e.target.files[0]); }}/>
                     </div>
                     <button type='submit' className='bg-white px-4 py-1 rounded-2xl hover:bg-gray-300'>

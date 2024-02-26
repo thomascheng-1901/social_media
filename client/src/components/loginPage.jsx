@@ -52,11 +52,11 @@ const LoginPage = () => {
             <form ref={form} onSubmit={LogIn} action="" className='w-[80%] mt-[5%]'>
                 <div className='space-y-5 text-center'>
                     <div className='space-y-2'>
-                        <h1>Email</h1>
+                        <h1 className='font-bold'>Email</h1>
                         <input placeholder='Enter your email' className="w-full placeholder:text-center" name='email' />
                     </div>
                     <div className='space-y-2'>
-                        <h1>Password</h1>
+                        <h1 className='font-bold'>Password</h1>
                         <input placeholder="Enter your password" className="w-full placeholder:text-center" name='password' />
                     </div>
                     <button type='submit' className='bg-white px-4 py-1 rounded-2xl hover:bg-gray-300'>
