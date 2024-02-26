@@ -1,20 +1,20 @@
-import React, { useLayoutEffect, useState, useRef } from 'react';
-import { Link, useNavigate} from 'react-router-dom';
+import React, { useLayoutEffect, useState, useRef, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaLocationDot } from "react-icons/fa6";
 import { MdWork } from "react-icons/md";
-import Avatar from "../assets/images/avatar1.jpg"
 import PostImage from "../assets/images/blog1.jpg"
 import CommentSection from "./commentSection.jsx"
-import {setProfileToFind} from "../state/index.jsx"
 import LikeSection from './likeSection.jsx';
+import PostPersonInfo from './postPersonInfo.jsx';
+import defaultProfilePicture from "../assets/images/defaultProfileImage.png"
+import {setProfileToFind} from "../state/index.jsx"
+import { Link, useNavigate} from 'react-router-dom';
 
 const HomePage = () => {
 
-
     const form = useRef();
 
-    const stop = useRef(true);
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
@@ -31,9 +31,28 @@ const HomePage = () => {
         console.log("error from redux: " + e);
     }
 
+    const [profileImagePath, setProfileImagePath] = useState("");
+
     useLayoutEffect(() => {
         getFeedPosts();
+        if (user){
+          getProfileImage(user._id);
+        }
     }, []);
+
+    const getProfileImage = async (id) => {
+      try {
+        const profileImageResponse = await fetch(`http://localhost:3001/profileImage/${id}/profilePicture`, {
+            method: 'GET',
+        });
+        const profileImage = await profileImageResponse.json();
+        console.log(profileImage[0].file);
+        setProfileImagePath("http://localhost:3001/images/" + profileImage[0].file);
+    } catch (e) {
+        setProfileImagePath(defaultProfilePicture)
+        console.log("get profile picture error: " + e);
+    }
+    }
 
   const getFeedPosts = async () => {
     try {
@@ -68,7 +87,6 @@ const HomePage = () => {
     }
   };
 
-  const navigate = useNavigate();
 
   const searchProfile = (id) => {
     if (stop.current) return console.log("stop navigate");
@@ -84,10 +102,13 @@ const HomePage = () => {
 
   return (
     <div className=' flex justify-evenly h-screen'>
+      
           {
             user !== null && 
             <div className='w-[30%] h-[30%] bg-white text-black text-center space-y-4 p-2 mt-10'>
-                  <button onClick={()=>{stop.current = false; searchProfile(user._id)}}>{user.firstName} {user.lastName}</button>
+                  <button onClick={()=>{stop.current = false; searchProfile(user._id)}}>
+                    <div className=' flex space-x-2 items-center text-center'><img className='max-w-[2.5rem] rounded-lg' src={profileImagePath}></img><p>{user.firstName} {user.lastName}</p></div>
+                  </button>
                   <div className='flex items-center space-x-5'><FaLocationDot/><h1>{user.location}</h1></div>
                   <div className='flex items-center space-x-5'><MdWork /><h1>{user.occupation}</h1></div>
             </div>
@@ -96,18 +117,7 @@ const HomePage = () => {
         {
             posts.map((post) => 
                <div key={post.id} className='bg-white p-2 space-y-3'>
-                    <div className='flex space-x-2'>
-                        <img className='max-w-[2.5rem] rounded-lg' src={Avatar} alt="profileImage" />
-                        <div className=''>
-                            <button onClick={()=>{stop.current = false; searchProfile(post.userId)}}>
-                              <div className='flex space-x-2'>
-                                <h1 className=''>{post.firstName}</h1>
-                                <h1 className=''>{post.lastName}</h1>
-                              </div>
-                            </button>
-                            <h2 className='text-gray-400/50 text-sm'>{post.createdAt.split("T")[0]}</h2>
-                        </div>
-                    </div>
+                <PostPersonInfo post = {post}/>
                     <p className=''>{post.description}</p>
                     <img className='rounded-lg' src={PostImage} alt="postImage" />
                     <div className=''>

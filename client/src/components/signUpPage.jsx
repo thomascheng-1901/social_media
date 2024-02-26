@@ -14,9 +14,12 @@ const SignUpPage = () => {
     const form = useRef();
 
     const [errorMessage, setErrorMessage] = useState("");
+
+    const [imagePath, setImagePath] = useState("");
  
     const SignUp = async (e) => {
         // firstName, lastName, email, password, picturePath, friends, location, occupation
+
         e.preventDefault();
         const formData = new FormData();
         formData.append("firstName", e.target.firstName.value);
@@ -25,8 +28,8 @@ const SignUpPage = () => {
         formData.append("password", e.target.password.value);
         formData.append("picturePath", "");
         formData.append("friends", []);
-        formData.append("location", "");
-        formData.append("occupation", "");
+        formData.append("location", e.target.location.value);
+        formData.append("occupation", e.target.occupation.value);
         try {
             const savedUserResponse = await fetch(
                 "http://localhost:3001/auth/register",
@@ -49,10 +52,42 @@ const SignUpPage = () => {
                     setErrorMessage("Account already registered");
                 }
             }
+
+            const formData2 = new FormData();
+            formData2.append("file", file);
+            formData2.append("id",savedUser._id);
+
+            console.log("upload file name = " + file.name);
+
+            const profileImageResponse = await fetch(
+                "http://localhost:3001/profilePicture",
+                {
+                    method: "POST",
+                    // headers: { "Content-Type": 'multipart/form-data' },
+                    body: formData2,
+                }
+            );
+            const profileImage = await profileImageResponse.json();
+            console.log("Upload profile picture successfully: " + Object.values(profileImage));
+
+            // try {
+            //     const profileImageResponse = await fetch(`http://localhost:3001/profileImage/${savedUser._id}/profilePicture`, {
+            //         method: 'GET',
+            //     });
+            //     const profileImage = await profileImageResponse.json();
+            //     console.log(profileImage);
+            // } catch (e) {
+            //     console.log("get profile picture error: " + e);
+            // }
+
         } catch (e){
-            console.log("Register error: " + e);
+            console.log("Upload profile picture error: " + e);
         }
     }
+
+
+
+    const [file, setfile] = useState();
 
     return (
         <div className='flex justify-center items-center'>
@@ -72,6 +107,17 @@ const SignUpPage = () => {
                     <div className='space-y-2'>
                         <h1>Password</h1>
                         <input placeholder="Enter your password" className="w-full placeholder:text-center" name='password' />
+                    </div>
+                    <div className='space-y-2'>
+                        <h1>Location</h1>
+                        <input placeholder="Enter your password" className="w-full placeholder:text-center" name='location' />
+                    </div>
+                    <div className='space-y-2'>
+                        <h1>Occupation</h1>
+                        <input placeholder="Enter your password" className="w-full placeholder:text-center" name='occupation' />
+                    </div>
+                    <div>
+                        <input type = "file" name = "file" onChange = {e => {setfile(e.target.files[0]); }}/>
                     </div>
                     <button type='submit' className='bg-white px-4 py-1 rounded-2xl hover:bg-gray-300'>
                         SIGNUP

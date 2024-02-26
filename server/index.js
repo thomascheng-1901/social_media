@@ -11,13 +11,16 @@ import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
+import profileImageRoute from "./routes/profileImages.js"
 import { register } from "./controllers/auth.js";
 import { createPost } from "./controllers/posts.js";
+import { createProfilePicture } from "./controllers/profileImages.js";
 import { verifyToken } from "./middleware/auth.js";
 import User from "./models/User.js";
 import Post from "./models/Post.js";
 import { users, posts } from "./data/index.js";
 import {app, server} from "./socket/socket.js"
+import exp from "constants";
 
 // configuration
 const __filename = fileURLToPath(import.meta.url)
@@ -25,34 +28,37 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 
 app.use(express.json());
+app.use(express.static("public"))
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({policy: "cross-origin"}));
 app.use(morgan("common"));
-app.use(bodyParser.json({limit:"30mb", extended: true}));
-app.use(bodyParser.urlencoded({limit:"30mb", extended: true}));
+app.use(bodyParser.json({limit:"50mb", extended: true}));
+app.use(bodyParser.urlencoded({limit:"50mb", extended: true}));
 app.use(cors());
-app.use("/assets", express.static(path.join(__dirname, "public/assets/")));
+// app.use("/assets", express.static(path.join(__dirname, "public/images")));
 
 // file storage
 const storage = multer.diskStorage({
-    destination: function (req, file, cb){
-        cb(null, "public/assets");
+    destination: (req, file, cb) => {
+        cb(null, "public/images");
     },
-    filename: function(req, file, cb){
+    filename: (req, file, cb) => {
         cb(null, file.originalname);
     }
 })
-const upload = multer({storage});
+const upload = multer({storage: storage});
 
 // ROUTES WITH FILES
 app.post("/auth/register", upload.single("picture"), register);
 // app.post("/posts", verifyToken, upload.single("picture"), createPost);
 app.post("/posts", bodyParser.json(), createPost);
+app.post("/profilePicture", upload.single("file"), createProfilePicture);
 
 // ROUTES
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
+app.use("/profileImage", profileImageRoute);
 
 //  MONGOOSE SETUP
 const PORT = process.env.PORT || 6001;

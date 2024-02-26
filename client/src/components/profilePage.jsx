@@ -5,6 +5,7 @@ import { MdWork } from "react-icons/md";
 import Avatar from "../assets/images/avatar1.jpg"
 import PostImage from "../assets/images/blog1.jpg"
 import CommentSection from "./commentSection.jsx"
+import defaultProfilePicture from "../assets/images/defaultProfileImage.png"
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -15,6 +16,7 @@ const ProfilePage = () => {
   useLayoutEffect(() => {
     getUserProfile(profileToFind);
     getUserPosts(profileToFind);
+    getProfileImage(profileToFind);
   }, []);
 
   const getUserProfile = async (id) => {
@@ -52,17 +54,34 @@ const ProfilePage = () => {
     }
   }
 
+  const [profileImagePath, setProfileImagePath] = useState("");
+
+const getProfileImage = async (id) => {
+  try {
+    const profileImageResponse = await fetch(`http://localhost:3001/profileImage/${id}/profilePicture`, {
+        method: 'GET',
+    });
+    const profileImage = await profileImageResponse.json();
+    console.log(profileImage[0].file);
+    setProfileImagePath("http://localhost:3001/images/" + profileImage[0].file);
+} catch (e) {
+    setProfileImagePath(defaultProfilePicture)
+    console.log("get profile picture error: " + e);
+}
+}
+
   return (
     <div className='flex justify-evenly h-screen'>
       {
-        user && 
-        <div className='w-[30%] h-[30%] bg-white text-black text-center space-y-4 p-2 mt-10'>
-            {/* <button onClick={()=>{stop.current = false; searchProfile(user._id)}}>{user.firstName} {user.lastName}</button> */}
-            <h1>{user.firstName} {user.lastName}</h1>
-            <div className='flex items-center space-x-5'><FaLocationDot/><h1>{user.location}</h1></div>
-            <div className='flex items-center space-x-5'><MdWork className=''/><h1>{user.occupation}</h1></div>
-        </div>
-      }
+            user !== null && 
+            <div className='w-[30%] h-[30%] bg-white text-black text-center space-y-4 p-2 mt-10'>
+                  <button onClick={()=>{}}>
+                    <div className=' flex space-x-2 items-center text-center'><img className='max-w-[2.5rem] rounded-lg' src={profileImagePath}></img><p>{user.firstName} {user.lastName}</p></div>
+                  </button>
+                  <div className='flex items-center space-x-5'><FaLocationDot/><h1>{user.location}</h1></div>
+                  <div className='flex items-center space-x-5'><MdWork /><h1>{user.occupation}</h1></div>
+            </div>
+          }
       <div className='w-[60%] space-y-5 mt-10 '>
         { posts.length > 0 &&
             posts.map((post) => 
