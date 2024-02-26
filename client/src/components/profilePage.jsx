@@ -11,7 +11,6 @@ const ProfilePage = () => {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
   const profileToFind = useSelector((state) => state.profileToFind);
-  console.log("profileToFind = " + profileToFind);
 
   useLayoutEffect(() => {
     getUserProfile(profileToFind);
@@ -26,8 +25,6 @@ const ProfilePage = () => {
       });
       const userData = await response.json();
       setUser(userData);
-      console.log("Fetch user profile: ");
-      console.log(user);
     } catch (e) {
       console.log('Fetch profile error: ' + e);
     }
@@ -47,8 +44,6 @@ const ProfilePage = () => {
         position += 1;
       }
       setPosts(new_obj);
-      console.log("Fetch user posts: ");
-      console.log(posts.length);
     } catch (e){
       console.log('Fetch posts error: ' + e);
     }
@@ -85,7 +80,7 @@ const getProfileImage = async (id) => {
       <div className='w-[60%] space-y-5 mt-10 '>
         { posts.length > 0 &&
             posts.map((post) => 
-                <div key={post.id} className='bg-white p-2 space-y-3'>
+                <div key={post} className='bg-white p-2 space-y-3'>
                     <div className='flex space-x-2'>
                         <img className='max-w-[2.5rem] rounded-lg' src={Avatar} alt="profileImage" />
                         <div className=''>

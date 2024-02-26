@@ -75,7 +75,7 @@ const commentSection = (props) => {
     return (
         <div className='w-full'>
             {!showComments  && <button onClick={toggle}>Comments: ({commentsToShow.length})</button>}
-            {showComments  && <button onClick={toggle}><div className='text-left'><p>Comments: ({commentsToShow.length})</p>{commentsToShow.length > 0 && commentsToShow.map((c) => {position += 1; return <p className={position % 2 === 0?'text-black':'text-gray-400'}>{c}</p>})}</div></button>}
+            {showComments  && <button onClick={toggle}><div className='text-left'><p>Comments: ({commentsToShow.length})</p>{commentsToShow.length > 0 && commentsToShow.map((c) => {position += 1; return <p key={c} className={position % 2 === 0?'text-black':'text-gray-400'}>{c}</p>})}</div></button>}
             {user !== null && <form ref={form} onSubmit={leaveComment}><textarea className='bg-gray-400/50 resize-none w-full mt-3' onChange={handleTextArea} name='commentTextArea' placeholder='Leave a comment'></textarea>{comment !== "" && <div className='text-center'><button type='submit' className='bg-gray-400/50 rounded-2xl px-3 py-1'>COMMENT</button></div> }</form>}
         </div>
     )
