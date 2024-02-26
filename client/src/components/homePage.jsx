@@ -39,7 +39,16 @@ const HomePage = () => {
         if (user){
           getProfileImage(user._id);
         }
+        alertBox();
     }, []);
+
+    const alertBox = () => {
+      var alerted = localStorage.getItem('alerted') || '';
+      if (alerted != 'yes') {
+        alert("You can click on users' name to view their personal profile 😊");
+        localStorage.setItem('alerted','yes');
+      }
+    }
 
     const getProfileImage = async (id) => {
       try {
