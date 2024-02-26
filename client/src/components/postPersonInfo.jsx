@@ -44,13 +44,20 @@ const postPersonInfo = (props) => {
   return (
     <div className='flex space-x-2'>
         <img className='max-w-[2.5rem] rounded-lg' src={profileImagePath === ""? defaultProfilePicture : profileImagePath} alt="profileImage" />
-        <button onClick={()=>{stop.current = false; searchProfile(props.post.userId)}}>
+        {!props.profilePage && <button onClick={()=>{stop.current = false; searchProfile(props.post.userId)}}>
             <div className='flex space-x-2'>
                 <h1 className=''>{props.post.firstName}</h1>
                 <h1 className=''>{props.post.lastName}</h1>
             </div>
             <h2 className=' text-left text-gray-400/50 text-sm'>{props.post.createdAt.split("T")[0]}</h2>
-        </button>
+        </button>}
+        {props.profilePage && <div >
+            <div className='flex space-x-2'>
+                <h1 className=''>{props.post.firstName}</h1>
+                <h1 className=''>{props.post.lastName}</h1>
+            </div>
+            <h2 className=' text-left text-gray-400/50 text-sm'>{props.post.createdAt.split("T")[0]}</h2>
+        </div>}
     </div>
   )
 }

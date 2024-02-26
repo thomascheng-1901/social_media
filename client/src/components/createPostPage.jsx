@@ -1,4 +1,4 @@
-import {React, useRef} from 'react'
+import {React, useRef, useState} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import {Link, useNavigate} from "react-router-dom"
 
@@ -37,16 +37,42 @@ const createPostPage = () => {
       
           e.target.postDescription.value = "";
           navigate("/");
-          // const posts = await response.json();
+
+          // upload post image
+          const posts = await response.json();
+          console.log("create post details: " + JSON.stringify(posts));
+
+          const formData2 = new FormData();
+          formData2.append("file", file);
+          console.log("create post id = " + posts._id)
+          console.log("create post id = " +JSON.stringify(posts)._id)
+          formData2.append("id",posts._id);
+
+          const postImageResponse = await fetch(
+            "http://localhost:3001/postPicture",
+            {
+                method: "POST",
+                // headers: { "Content-Type": 'multipart/form-data' },
+                body: formData2,
+            }
+        );
+          const postImage = await postImageResponse.json();
+          console.log("Upload post picture successfully: " + Object.values(postImage));
         } else {
           e.preventDefault();
           console.log("Empty text");
         }
       };
 
+    const [file, setfile] = useState();
+
   return (
     <div className='flex justify-center items-center mt-[10%]'>
         <form ref={form} onSubmit={createPost} className='space-y-4 w-[50%] text-center'>
+            <div className='space-y-2'>
+                <p>Choose an image for your post : D</p>
+                <input type = "file" name = "file" onChange = {e => {setfile(e.target.files[0]); }}/>
+            </div>
             <textarea name="postDescription" className='bg-gray-400/50 w-full h-[40%] resize-none px-1 py-1' id="" placeholder='Create a post'></textarea>
             <button type='submit' className='rounded-2xl bg-gray-400/50 px-4 py-1'>POST</button>
         </form>

@@ -24,8 +24,8 @@ export const createPost = async (req, res) => {
       console.log("give me this 4");
       await newPost.save();
       // grab all the posts
-      const posts = await Post.find();
-      res.status(201).json(posts);
+    //   const posts = await Post.find();
+      res.status(201).json(newPost);
     } catch (err) {
       console.log(err);
       res.status(409).json({ message: err.message });

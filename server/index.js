@@ -21,6 +21,8 @@ import Post from "./models/Post.js";
 import { users, posts } from "./data/index.js";
 import {app, server} from "./socket/socket.js"
 import exp from "constants";
+import { createPostPicture } from "./controllers/postImages.js";
+import postImageRoute from "./routes/postImages.js";
 
 // configuration
 const __filename = fileURLToPath(import.meta.url)
@@ -43,7 +45,7 @@ const storage = multer.diskStorage({
         cb(null, "public/images");
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname);
+        cb(null, Date.now() + file.originalname);
     }
 })
 const upload = multer({storage: storage});
@@ -53,12 +55,14 @@ app.post("/auth/register", upload.single("picture"), register);
 // app.post("/posts", verifyToken, upload.single("picture"), createPost);
 app.post("/posts", bodyParser.json(), createPost);
 app.post("/profilePicture", upload.single("file"), createProfilePicture);
+app.post("/postPicture", upload.single("file"), createPostPicture);
 
 // ROUTES
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 app.use("/profileImage", profileImageRoute);
+app.use("/postImage", postImageRoute);
 
 //  MONGOOSE SETUP
 const PORT = process.env.PORT || 6001;

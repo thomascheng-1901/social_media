@@ -7,11 +7,6 @@ export const createProfilePicture = async (req, res) => {
         const {
             file, id
         } = req.body;
-        console.log(req.body);
-        console.log("file = ");
-        console.log(req.file);
-        console.log("id = ");
-        console.log(id);
       const newProfilePicture = new ProfileImage({
         userId: id,
         file: req.file.filename
@@ -26,9 +21,7 @@ export const createProfilePicture = async (req, res) => {
 
 export const getProfilePicture = async (req, res) => {
     try {
-        const {userId} = req.params;
-        console.log("getting pictures id = " + userId);
-    
+        const {userId} = req.params;    
       const profileImage = await ProfileImage.find({userId});
       res.status(200).json(profileImage);
     } catch (err){

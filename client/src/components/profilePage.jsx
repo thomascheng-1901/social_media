@@ -6,6 +6,8 @@ import Avatar from "../assets/images/avatar1.jpg"
 import PostImage from "../assets/images/blog1.jpg"
 import CommentSection from "./commentSection.jsx"
 import defaultProfilePicture from "../assets/images/defaultProfileImage.png"
+import PostImageSection from './postImageSection.jsx';
+import PostPersonInfo from './postPersonInfo.jsx';
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -80,16 +82,17 @@ const getProfileImage = async (id) => {
       <div className='w-[60%] space-y-5 mt-10 '>
         { posts.length > 0 &&
             posts.map((post) => 
-                <div key={post} className='bg-white p-2 space-y-3'>
+                <div className='bg-white p-2 space-y-3'>
                     <div className='flex space-x-2'>
-                        <img className='max-w-[2.5rem] rounded-lg' src={Avatar} alt="profileImage" />
-                        <div className=''>
+                        {/* <img className='max-w-[2.5rem] rounded-lg' src={Avatar} alt="profileImage" /> */}
+                        <PostPersonInfo post = {post} profilePage = {true}/>
+                        {/* <div className=''>
                             <div className='flex space-x-2'>
                                 <h1 className=''>{post.firstName}</h1>
                                 <h1 className=''>{post.lastName}</h1>
                             </div>
                             <h2 className='text-gray-400/50 text-sm'>{post.createdAt.split("T")[0]}</h2>
-                        </div>
+                        </div> */}
                     </div>
                     <p className=''>{post.description}</p>
                     <img className='rounded-lg' src={PostImage} alt="postImage" />

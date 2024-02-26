@@ -85,8 +85,6 @@ const SignUpPage = () => {
         }
     }
 
-
-
     const [file, setfile] = useState();
 
     return (
