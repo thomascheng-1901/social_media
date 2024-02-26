@@ -21,7 +21,8 @@ const SignUpPage = () => {
         // firstName, lastName, email, password, picturePath, friends, location, occupation
 
         e.preventDefault();
-        const formData = new FormData();
+        if (e.target.firstName.value && e.target.lastName.value && e.target.email.value && e.target.password.value && e.target.location.value && e.target.occupation.value && file){
+            const formData = new FormData();
         formData.append("firstName", e.target.firstName.value);
         formData.append("lastName", e.target.lastName.value);
         formData.append("email", e.target.email.value);
@@ -83,6 +84,10 @@ const SignUpPage = () => {
         } catch (e){
             console.log("Upload profile picture error: " + e);
         }
+        } else {
+            setErrorMessage("Please enter all info");
+        }
+        
     }
 
     const [file, setfile] = useState();
@@ -121,7 +126,7 @@ const SignUpPage = () => {
                     <button type='submit' className='bg-white px-4 py-1 rounded-2xl hover:bg-gray-300'>
                         SIGNUP
                     </button>
-                    <div className='font-bold text-xl'>
+                    <div className='font-bold text-xl text-red-500'>
                         {errorMessage}
                     </div>
                     <div>

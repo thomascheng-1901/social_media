@@ -15,7 +15,8 @@ const LoginPage = () => {
  
     const LogIn = async (e) => {
         e.preventDefault();
-        var obj = new Object();
+        if (e.target.email.value && e.target.password.value){
+            var obj = new Object();
         obj.email = e.target.email.value;
         obj.password = e.target.password.value;
         var jsonString= JSON.stringify(obj);
@@ -45,6 +46,9 @@ const LoginPage = () => {
             // setErrorMessage("Something wrong has occured, please try again later");
         }
         console.log("login : " + JSON.stringify(loggedIn));
+        } else {
+            setErrorMessage("Please enter all info");
+        }
     }
 
     return (
@@ -62,7 +66,7 @@ const LoginPage = () => {
                     <button type='submit' className='bg-white px-4 py-1 rounded-2xl hover:bg-gray-300'>
                         LOGIN
                     </button>
-                    <div className='font-bold text-xl'>
+                    <div className='font-bold text-xl text-red-500'>
                         {errorMessage}
                     </div>
                 </div>
