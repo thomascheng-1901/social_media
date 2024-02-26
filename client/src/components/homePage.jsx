@@ -119,12 +119,12 @@ const HomePage = () => {
             posts.map((post) => 
                <div key={post.id} className='bg-white p-2 space-y-3'>
                 <PostPersonInfo post = {post} profilePage = {false}/>
-                    <p className=''>{post.description}</p>
-                    <PostImageSection post = {post}/>
-                    <div className=''>
-                      <LikeSection likes = {post.likes} id={post.id}></LikeSection>
-                      <CommentSection comments ={post.comments} id={post.id}></CommentSection>
-                    </div>
+                <p className=''>{post.description}</p>
+                <PostImageSection post = {post} profilePage = {false}/>
+                <div className=''>
+                    <LikeSection likes = {post.likes} id={post.id}></LikeSection>
+                    <CommentSection comments ={post.comments} id={post.id}></CommentSection>
+                </div>
                 </div>
             )
         }

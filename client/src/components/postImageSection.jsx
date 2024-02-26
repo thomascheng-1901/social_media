@@ -4,7 +4,12 @@ import defaultProfilePicture from "../assets/images/defaultProfileImage.png"
 const postImageSection = (props) => {
 
     useEffect(() => {
-        getPostImage(props.post.id);
+        console.log(props.post);
+        if (props.profilePage){
+            getPostImage(props.post._id);
+        } else {
+            getPostImage(props.post.id);
+        }
     },[])
 
     const getPostImage = async (id) => {

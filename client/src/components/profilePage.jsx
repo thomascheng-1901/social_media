@@ -95,7 +95,8 @@ const getProfileImage = async (id) => {
                         </div> */}
                     </div>
                     <p className=''>{post.description}</p>
-                    <img className='rounded-lg' src={PostImage} alt="postImage" />
+                    {/* <img className='rounded-lg' src={PostImage} alt="postImage" /> */}
+                    <PostImageSection post = {post} profilePage = {true}/>
                     <CommentSection comments ={post.comments} id = {post.id}></CommentSection>
                 </div>
             )
