@@ -74,7 +74,7 @@ const getProfileImage = async (id) => {
             user !== null && 
             <div className='w-[30%] h-[30%] bg-white text-black text-center space-y-4 p-2 mt-10'>
                   <button onClick={()=>{}}>
-                    <div className=' flex space-x-2 h-[45px]'><img className='max-w-[2.5rem] min-w-[2.5rem]  rounded-lg' src={profileImagePath}></img><p>{user.firstName} {user.lastName}</p></div>
+                    <div className=' flex space-x-2 h-[43px]'><img className='max-w-[2.5rem] min-w-[2.5rem]  rounded-lg' src={profileImagePath}></img><p>{user.firstName} {user.lastName}</p></div>
                   </button>
                   <div className='flex items-center space-x-5'><FaLocationDot/><h1>{user.location}</h1></div>
                   <div className='flex items-center space-x-5'><MdWork /><h1>{user.occupation}</h1></div>
