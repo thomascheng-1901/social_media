@@ -21,7 +21,6 @@ const Header = () => {
             setLogOut()
         );
         navigate("/");
-        console.log("After logout user = " + user);
     }
 
     return (

@@ -41,8 +41,6 @@ export const SocketContextProvider = ({children}) => {
         setSocket(socket);
 
         socket.on("leaveComment", (currentComments) => {
-            console.log(currentComments);
-            console.log("someone left a comment: " + currentComments[0] + " which is " + currentComments[1]);
             setPostIdWithComment(currentComments[0]);
             setComments(currentComments[1]);
         })

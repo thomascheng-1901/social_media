@@ -5,11 +5,8 @@ import { io } from "../socket/socket.js";
 // CREATE
 export const createPost = async (req, res) => {
     try {
-      console.log(req.body);
       const { userId, description, picturePath, user } = req.body;
-      console.log("give me this 2: " + userId);
       // const user = await User.findById(userId);
-      console.log("give me this 3: " + JSON.stringify(user));
       const newPost = new Post({
         userId: userId,
         firstName: user.firstName,
@@ -21,7 +18,6 @@ export const createPost = async (req, res) => {
         likes: {},
         comments: [],
       });
-      console.log("give me this 4");
       await newPost.save();
       // grab all the posts
     //   const posts = await Post.find();
@@ -54,7 +50,6 @@ export const getUserPosts = async (req, res) => {
 
 // UPDATE
 export const likePost = async (req, res) => {
-    console.log("is this called");
     try {
         const {id} = req.params;
         const {userId} = req.body;

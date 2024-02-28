@@ -56,7 +56,6 @@ const HomePage = () => {
             method: 'GET',
         });
         const profileImage = await profileImageResponse.json();
-        console.log("profile image = " + JSON.stringify(profileImage[0]));
         setProfileImagePath("http://localhost:3001/images/" + profileImage[0].file);
     } catch (e) {
         setProfileImagePath(defaultProfilePicture)

@@ -17,7 +17,6 @@ const createPostPage = () => {
 
     const createPost = async (e) => {
         if (e.target.postDescription.value !== "") {
-          console.log(user.firstName);
           const content = e.target.postDescription.value;
           e.preventDefault();
           const data = {
@@ -40,12 +39,9 @@ const createPostPage = () => {
 
           // upload post image
           const posts = await response.json();
-          console.log("create post details: " + JSON.stringify(posts));
 
           const formData2 = new FormData();
           formData2.append("file", file);
-          console.log("create post id = " + posts._id)
-          console.log("create post id = " +JSON.stringify(posts)._id)
           formData2.append("id",posts._id);
 
           const postImageResponse = await fetch(
@@ -57,7 +53,6 @@ const createPostPage = () => {
             }
         );
           const postImage = await postImageResponse.json();
-          console.log("Upload post picture successfully: " + Object.values(postImage));
         } else {
           e.preventDefault();
           console.log("Empty text");

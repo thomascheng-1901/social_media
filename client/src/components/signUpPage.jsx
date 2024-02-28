@@ -40,7 +40,6 @@ const SignUpPage = () => {
                 }
             );
             const savedUser = await savedUserResponse.json();
-            console.log("saveduser = " + JSON.stringify(savedUser));
             if (!("error" in savedUser)){
                 navigate("/");
                 dispatch(
@@ -58,7 +57,6 @@ const SignUpPage = () => {
             formData2.append("file", file);
             formData2.append("id",savedUser._id);
 
-            console.log("upload file name = " + file.name);
 
             const profileImageResponse = await fetch(
                 "http://localhost:3001/profilePicture",
@@ -69,7 +67,6 @@ const SignUpPage = () => {
                 }
             );
             const profileImage = await profileImageResponse.json();
-            console.log("Upload profile picture successfully: " + Object.values(profileImage));
 
             // try {
             //     const profileImageResponse = await fetch(`http://localhost:3001/profileImage/${savedUser._id}/profilePicture`, {

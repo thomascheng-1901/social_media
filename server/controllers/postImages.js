@@ -23,7 +23,6 @@ export const getPostPicture = async (req, res) => {
     try {
         const {postId} = req.params;    
       const postImage = await PostImage.find({postId});
-      console.log(postImage);
       res.status(200).json(postImage);
     } catch (err){
         console.log("get post picture failed");
