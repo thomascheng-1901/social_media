@@ -8,6 +8,7 @@ import CommentSection from "./commentSection.jsx"
 import defaultProfilePicture from "../assets/images/defaultProfileImage.png"
 import PostImageSection from './postImageSection.jsx';
 import PostPersonInfo from './postPersonInfo.jsx';
+import LikeSection from './likeSection.jsx';
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -97,7 +98,10 @@ const getProfileImage = async (id) => {
                     <p className=''>{post.description}</p>
                     {/* <img className='rounded-lg' src={PostImage} alt="postImage" /> */}
                     <PostImageSection post = {post} profilePage = {true}/>
-                    <CommentSection comments ={post.comments} id = {post.id}></CommentSection>
+                    <div>
+                      <LikeSection likes = {post.likes} id={post.id}></LikeSection>
+                      <CommentSection comments ={post.comments} id = {post.id}></CommentSection>
+                    </div>
                 </div>
             )
         }
