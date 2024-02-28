@@ -41,7 +41,7 @@ const commentSection = (props) => {
     const [showComments, setShowComments] = useState(false);
 
     function toggle(){
-        if (props.comments.length > 0)
+        if (commentsToShow.length > 0)
         setShowComments(!showComments);
     }
 
