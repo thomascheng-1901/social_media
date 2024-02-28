@@ -42,8 +42,8 @@ const postPersonInfo = (props) => {
       }
 
   return (
-    <div className='flex space-x-2'>
-        <img className='max-w-[2.5rem] rounded-lg' src={profileImagePath === ""? defaultProfilePicture : profileImagePath} alt="profileImage" />
+    <div className='flex space-x-2 '>
+        <img className='max-w-[2.5rem] min-w-[2.5rem] rounded-lg' src={profileImagePath === ""? defaultProfilePicture : profileImagePath} alt="profileImage" />
         {!props.profilePage && <button onClick={()=>{stop.current = false; searchProfile(props.post.userId)}}>
             <div className='flex space-x-2'>
                 <h1 className=''>{props.post.firstName}</h1>
