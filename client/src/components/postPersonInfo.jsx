@@ -18,7 +18,7 @@ const postPersonInfo = (props) => {
                 });
                 const profileImage = await profileImageResponse.json();
                 // console.log(profileImage);
-                setProfileImagePath("http://localhost:3001/images/" + profileImage[0].file);
+                setProfileImagePath("https://localhost:3001/images/" + profileImage[0].file);
             } catch (e) {
                 setProfileImagePath(defaultProfilePicture);
                 // console.log("get profile picture error: " + e);

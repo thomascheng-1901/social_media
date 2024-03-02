@@ -60,7 +60,7 @@ const getProfileImage = async (id) => {
         method: 'GET',
     });
     const profileImage = await profileImageResponse.json();
-    setProfileImagePath("http://localhost:3001/images/" + profileImage[0].file);
+    setProfileImagePath("https://localhost:3001/images/" + profileImage[0].file);
 } catch (e) {
     setProfileImagePath(defaultProfilePicture)
     console.log("get profile picture error: " + e);

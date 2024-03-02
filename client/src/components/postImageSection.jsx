@@ -17,7 +17,7 @@ const postImageSection = (props) => {
               method: 'GET',
           });
           const postImage = await postImageResponse.json();
-          setPostImagePath("http://localhost:3001/images/" + postImage[0].file);
+          setPostImagePath("https://localhost:3001/images/" + postImage[0].file);
         //   return "http://localhost:3001/images/" + postImage[0].file;
       } catch (e) {
           console.log("get post picture error: " + e);
