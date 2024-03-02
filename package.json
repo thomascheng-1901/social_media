@@ -38,6 +38,7 @@
   },
   "render-postbuild": "npm install --prefix frontend --production=false && cd /opt/render/project/src/frontend && npm run build",
   "devDependencies": {
+    "bcryptjs": "^2.4.3",
     "nodemon": "^3.1.0"
   }
 }
