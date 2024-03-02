@@ -31,7 +31,7 @@ const __dirname = path.resolve();
 dotenv.config();
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname,"client/dist")), express.static("public"))
+app.use(express.static(path.join(__dirname,"client/dist")), express.static("server/public"))
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({policy: "cross-origin"}));
 app.use(morgan("common"));
