@@ -33,7 +33,7 @@ const SignUpPage = () => {
         formData.append("occupation", e.target.occupation.value);
         try {
             const savedUserResponse = await fetch(
-                "http://localhost:3001/auth/register",
+                "https://social-media-jok9.onrender.com/auth/register",
                 {
                 method: "POST",
                 body: formData,
@@ -59,7 +59,7 @@ const SignUpPage = () => {
 
 
             const profileImageResponse = await fetch(
-                "http://localhost:3001/profilePicture",
+                "https://social-media-jok9.onrender.com/profilePicture",
                 {
                     method: "POST",
                     // headers: { "Content-Type": 'multipart/form-data' },
@@ -69,7 +69,7 @@ const SignUpPage = () => {
             const profileImage = await profileImageResponse.json();
 
             // try {
-            //     const profileImageResponse = await fetch(`http://localhost:3001/profileImage/${savedUser._id}/profilePicture`, {
+            //     const profileImageResponse = await fetch(`https://social-media-jok9.onrender.com/profileImage/${savedUser._id}/profilePicture`, {
             //         method: 'GET',
             //     });
             //     const profileImage = await profileImageResponse.json();

@@ -52,11 +52,11 @@ const HomePage = () => {
 
     const getProfileImage = async (id) => {
       try {
-        const profileImageResponse = await fetch(`http://localhost:3001/profileImage/${id}/profilePicture`, {
+        const profileImageResponse = await fetch(`https://social-media-jok9.onrender.com/profileImage/${id}/profilePicture`, {
             method: 'GET',
         });
         const profileImage = await profileImageResponse.json();
-        setProfileImagePath("https://localhost:3001/images/" + profileImage[0].file);
+        setProfileImagePath("https://social-media-jok9.onrender.com/images/" + profileImage[0].file);
     } catch (e) {
         setProfileImagePath(defaultProfilePicture)
         console.log("get profile picture error: " + e);
@@ -65,7 +65,7 @@ const HomePage = () => {
 
   const getFeedPosts = async () => {
     try {
-      const postsResponse = await fetch('http://localhost:3001/posts', {
+      const postsResponse = await fetch('https://social-media-jok9.onrender.com/posts', {
         method: 'GET',
       });
       const posts = await postsResponse.json();

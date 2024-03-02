@@ -18,7 +18,7 @@ const likeSection = (props) => {
 
     const likePost = async (e) => {
         e.preventDefault();
-        const response = await fetch(`http://localhost:3001/posts/${props.id}/like`, {
+        const response = await fetch(`https://social-media-jok9.onrender.com/posts/${props.id}/like`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

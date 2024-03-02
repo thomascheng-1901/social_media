@@ -26,7 +26,7 @@ const createPostPage = () => {
             user: user,
           };
       
-          const response = await fetch(`http://localhost:3001/posts`, {
+          const response = await fetch(`https://social-media-jok9.onrender.com/posts`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const createPostPage = () => {
           formData2.append("id",posts._id);
 
           const postImageResponse = await fetch(
-            "http://localhost:3001/postPicture",
+            "https://social-media-jok9.onrender.com/postPicture",
             {
                 method: "POST",
                 // headers: { "Content-Type": 'multipart/form-data' },

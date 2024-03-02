@@ -13,12 +13,12 @@ const postImageSection = (props) => {
 
     const getPostImage = async (id) => {
         try {
-          const postImageResponse = await fetch(`http://localhost:3001/postImage/${id}/postPicture`, {
+          const postImageResponse = await fetch(`https://social-media-jok9.onrender.com/postImage/${id}/postPicture`, {
               method: 'GET',
           });
           const postImage = await postImageResponse.json();
-          setPostImagePath("https://localhost:3001/images/" + postImage[0].file);
-        //   return "http://localhost:3001/images/" + postImage[0].file;
+          setPostImagePath("https://social-media-jok9.onrender.com/images/" + postImage[0].file);
+        //   return "https://social-media-jok9.onrender.com/images/" + postImage[0].file;
       } catch (e) {
           console.log("get post picture error: " + e);
           setPostImagePath(defaultProfilePicture);

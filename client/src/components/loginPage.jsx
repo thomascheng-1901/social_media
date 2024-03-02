@@ -20,7 +20,7 @@ const LoginPage = () => {
         obj.email = e.target.email.value;
         obj.password = e.target.password.value;
         var jsonString= JSON.stringify(obj);
-        const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+        const loggedInResponse = await fetch("https://social-media-jok9.onrender.com/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: jsonString,

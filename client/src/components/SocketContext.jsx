@@ -26,12 +26,12 @@ export const SocketContextProvider = ({children}) => {
     useEffect(() => {
         let socket;
         try {
-            socket = io("http://localhost:3001",
+            socket = io("https://social-media-jok9.onrender.com",
             { transports : ['websocket'] },{
                 query: {userId: currentUser._id}
             })
         } catch (e){
-            socket = io("http://localhost:3001",
+            socket = io("https://social-media-jok9.onrender.com",
             { transports : ['websocket'] }
             // ,{query: {userId: currentUser._id}
             // }

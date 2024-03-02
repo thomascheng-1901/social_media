@@ -60,7 +60,7 @@ const commentSection = (props) => {
     const leaveComment = async (e) => {
         e.preventDefault();
         // console.log("leave comment at " + postIdWithComment);
-        const response = await fetch(`http://localhost:3001/posts/${props.id}/comment`, {
+        const response = await fetch(`https://social-media-jok9.onrender.com/posts/${props.id}/comment`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

@@ -23,7 +23,7 @@ const ProfilePage = () => {
 
   const getUserProfile = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3001/users/${id}`, {
+      const response = await fetch(`https://social-media-jok9.onrender.com/users/${id}`, {
         method: 'GET',
       });
       const userData = await response.json();
@@ -35,8 +35,8 @@ const ProfilePage = () => {
 
   const getUserPosts = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3001/posts/${id}/posts`,{
-      // const response = await fetch(`http://localhost:3001/posts/65c7b6e3d6c101ef2ca8e9f7/posts`,{
+      const response = await fetch(`https://social-media-jok9.onrender.com/posts/${id}/posts`,{
+      // const response = await fetch(`https://social-media-jok9.onrender.com/posts/65c7b6e3d6c101ef2ca8e9f7/posts`,{
         method: 'GET',
       });
       const posts = await response.json();
@@ -56,11 +56,11 @@ const ProfilePage = () => {
 
 const getProfileImage = async (id) => {
   try {
-    const profileImageResponse = await fetch(`http://localhost:3001/profileImage/${id}/profilePicture`, {
+    const profileImageResponse = await fetch(`https://social-media-jok9.onrender.com/profileImage/${id}/profilePicture`, {
         method: 'GET',
     });
     const profileImage = await profileImageResponse.json();
-    setProfileImagePath("https://localhost:3001/images/" + profileImage[0].file);
+    setProfileImagePath("https://social-media-jok9.onrender.com/images/" + profileImage[0].file);
 } catch (e) {
     setProfileImagePath(defaultProfilePicture)
     console.log("get profile picture error: " + e);
