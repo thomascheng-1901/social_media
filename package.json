@@ -1,0 +1,26 @@
+{
+  "name": "mew-vite",
+  "version": "1.0.0",
+  "description": "TODO:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js",
+    "build": "npm install && npm install -- prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thomascheng-1901/social-media.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thomascheng-1901/social-media/issues"
+  },
+  "homepage": "https://github.com/thomascheng-1901/social-media#readme",
+  "dependencies": {
+    "client": "^0.0.1",
+    "prefix": "^1.0.0"
+  }
+}

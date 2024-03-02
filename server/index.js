@@ -26,11 +26,12 @@ import postImageRoute from "./routes/postImages.js";
 
 // configuration
 const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename);
+// const __dirname = path.dirname(__filename);
+const __dirname = path.resolve();
 dotenv.config();
 
 app.use(express.json());
-app.use(express.static("public"))
+app.use(express.static(path.join(__dirname,"client")), express.static("public"))
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({policy: "cross-origin"}));
 app.use(morgan("common"));
@@ -64,9 +65,13 @@ app.use("/posts", postRoutes);
 app.use("/profileImage", profileImageRoute);
 app.use("/postImage", postImageRoute);
 
+app.get("*", (req,res) => {
+    res.sendfile(path.join(__dirname,"client", "dist", "index.html"))
+})
+
 //  MONGOOSE SETUP
 const PORT = process.env.PORT || 6001;
-mongoose.connect(process.env.MONGO_URL,{
+mongoose.connect("mongodb+srv://thomascchun1901:Abc123def0_0@cluster0.toginma.mongodb.net/?retryWrites=true&w=majority",{
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(()=>{ 
